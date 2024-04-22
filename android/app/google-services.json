@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986076206133",
+    "project_id": "tambalban-87241",
+    "storage_bucket": "tambalban-87241.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986076206133:android:e71f0458d10430db1c4d7c",
+        "android_client_info": {
+          "package_name": "com.tambalbanonline.tambalbanonline"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJYwQUjeKQxuxGPi8XjOYNPf_ifooJryk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
