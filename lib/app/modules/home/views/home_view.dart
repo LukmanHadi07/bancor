@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 import '../controllers/home_controller.dart';
@@ -52,37 +51,36 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _buildMapContainer() {
+ Widget _buildMapContainer() {
     return SizedBox(
-        width: double.infinity,
-        height: 500,
-        child: Obx(
-          () => FlutterMap(
-            options: MapOptions(
-              initialCenter: controller.userLocation.value,
-              initialZoom: 9.2,
+      width: double.infinity,
+      height: 500,
+      child: Obx(
+        () => GoogleMap(
+          initialCameraPosition: CameraPosition(
+            target: LatLng(
+              controller.userLocation.value.latitude,
+              controller.userLocation.value.longitude,
             ),
-            children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.example.app',
-              ),
-              MarkerLayer(markers: [
-                Marker(
-                  point: controller.userLocation.value,
-                  width: 80.0,
-                  height: 80.0,
-                  child: const Icon(
-                    Icons.location_on,
-                    color: Colors.red,
-                    size: 48.0,
-                  ),
-                )
-              ])
-            ],
+            zoom: 9.2,
           ),
-        ));
-  }
+          markers: {
+            Marker(
+              markerId: MarkerId('userLocation'),
+              position: LatLng(
+                controller.userLocation.value.latitude,
+                controller.userLocation.value.longitude,
+              ),
+              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+            ),
+          },
+          onMapCreated: (GoogleMapController controller) {},
+        ),
+      ),
+    );
+}
+
+  
 }
 
 Widget _containerDaftarTambanBan() {
