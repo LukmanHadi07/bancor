@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tambalbanonline/app/routes/app_pages.dart';
 import 'package:tambalbanonline/app/utils/constants.dart';
 
 class AuthController extends GetxController {
@@ -20,6 +21,9 @@ final RxBool isLoggedIn = false.obs;
     firebaseUser = Rx<User?>(firebaseAuth.currentUser);
     firebaseUser.bindStream(firebaseAuth.userChanges());
   }
+
+
+  
 
 
   Future<void> checkLoggedIn() async {
@@ -45,7 +49,7 @@ final RxBool isLoggedIn = false.obs;
     try {
       await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
       Get.snackbar('Success', 'Registration Success');
-      Get.offNamed('/login');
+      Get.offNamed(Routes.loginScreen);
     } catch (firebaseAuthException) {}
   }
 
@@ -55,7 +59,7 @@ final RxBool isLoggedIn = false.obs;
       await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
       await setLoggedIn(true);
       Get.snackbar('Success', 'Login Success');
-      Get.offNamed('/home');
+      Get.toNamed(Routes.homeScreen);
 
     } on FirebaseAuthException catch(error) {
        isLoading.value = false;
@@ -78,7 +82,7 @@ final RxBool isLoggedIn = false.obs;
       await firebaseAuth.signOut();
       await setLoggedIn(false);
        Get.snackbar('Success', 'Logout Success');
-      Get.offAllNamed('/login');  
+      Get.offNamed(Routes.loginScreen);  
     } catch (e) {
       print(e); 
       Get.snackbar('Error', 'Logout failed: $e');

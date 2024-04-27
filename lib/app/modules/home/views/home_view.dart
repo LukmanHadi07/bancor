@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tambalbanonline/app/modules/profile/views/profile_view.dart';
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  final HomeController controller = Get.put(HomeController());
+class HomeView  extends StatelessWidget {
+ final HomeController homeController = Get.put(HomeController());
+
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Obx(() => controller.isLoading.value
+          Obx(() => homeController.isLoading.value
               ? _buildShimmerContainer()
               : _buildMapContainer()),
           InkWell(
@@ -23,19 +27,19 @@ class HomeView extends GetView<HomeController> {
         ]),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-         Get.toNamed('/profile');
-        },
-        backgroundColor: ColorsApp.orange, // Warna latar belakang tombol
-        shape: RoundedRectangleBorder(
-          // Mengatur bentuk tombol menjadi bulat
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-         child: const Icon(
-          Icons.account_circle,
-          color: Colors.white,
-        ),
-      ),
+  onPressed: () {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileView()));
+  },
+  backgroundColor: ColorsApp.orange,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(50.0),
+  ),
+  child: const Icon(
+    Icons.account_circle,
+    color: Colors.white,
+  ),
+),
+
     );
   }
 
@@ -46,39 +50,50 @@ class HomeView extends GetView<HomeController> {
       child: Container(
         width: double.infinity,
         height: 500,
-        color: Colors.white, // You can set any color as a placeholder
+        color: Colors.white, 
       ),
     );
   }
 
- Widget _buildMapContainer() {
-    return SizedBox(
-      width: double.infinity,
-      height: 500,
-      child: Obx(
-        () => GoogleMap(
-          initialCameraPosition: CameraPosition(
-            target: LatLng(
-              controller.userLocation.value.latitude,
-              controller.userLocation.value.longitude,
-            ),
-            zoom: 9.2,
+Widget _buildMapContainer() {
+  return SizedBox(
+    width: double.infinity,
+    height: 500,
+    child: Obx(
+      () => GoogleMap(
+        myLocationEnabled: true,
+        mapType: MapType.normal,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(
+            homeController.userLocation.value.latitude,
+            homeController.userLocation.value.longitude,
           ),
-          markers: {
-            Marker(
-              markerId: MarkerId('userLocation'),
-              position: LatLng(
-                controller.userLocation.value.latitude,
-                controller.userLocation.value.longitude,
-              ),
-              icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-            ),
-          },
-          onMapCreated: (GoogleMapController controller) {},
+          zoom: 9.2,
         ),
+        markers: {
+          Marker(
+            markerId: const MarkerId('af8a091de5db5584'),
+            position: LatLng(
+              homeController.userLocation.value.latitude,
+              homeController.userLocation.value.longitude,
+            ),
+          ),
+        },
+        onMapCreated: (GoogleMapController controller) {},
+        // Tambahkan callback untuk menangani kesalahan
+        onCameraMoveStarted: () {
+          // Mengatur loading menjadi true ketika pengguna mulai berinteraksi dengan peta
+          homeController.isLoading.value = true;
+        },
+        onCameraIdle: () {
+          // Mengatur loading menjadi false ketika peta selesai bergerak
+          homeController.isLoading.value = false;
+        },
       ),
-    );
+    ),
+  );
 }
+
 
   
 }

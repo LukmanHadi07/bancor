@@ -16,7 +16,7 @@ class ProfileController extends GetxController {
    Future<String?> getImageUrl() async {
     try {
       String userId = firebaseAuth.currentUser!.uid;
-       if (userId == null) {
+       if (userId.isEmpty) {
         throw Exception('User is not authenticated');
       }
       final ref = firebase_storage.FirebaseStorage.instance.ref().child('uploads/$userId');
