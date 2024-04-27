@@ -42,7 +42,7 @@ RxString imageUrl = ''.obs;
        // ignore: unrelated_type_equality_checks
        if(imageFile == null) return null;
        String userId = firebaseAuth.currentUser!.uid;
-       if (userId == null) {
+       if (userId.isEmpty) {
         throw Exception('User is not authenticated');
       }
        firebase_storage.Reference ref =
@@ -76,7 +76,7 @@ RxString imageUrl = ''.obs;
  Future<String?> getImageUrl() async {
     try {
       String userId = firebaseAuth.currentUser!.uid;
-       if (userId == null) {
+       if (userId.isEmpty) {
         throw Exception('User is not authenticated');
       }
       final ref = firebase_storage.FirebaseStorage.instance.ref().child('uploads/$userId');

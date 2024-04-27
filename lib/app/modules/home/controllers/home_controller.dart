@@ -8,37 +8,48 @@ class HomeController extends GetxController {
      final locationMessage = ''.obs;
     var userLocation = const LatLng(0, 0).obs;
 
-  @override
-  void onInit() {
-    shimmerEffect();
-    _getUserLocation();
-    super.onInit();
 
+
+
+  @override
+  void onReady() {
+      shimmerEffect();
+    _getUserLocation();
+    super.onReady();
+  }
+  
+   @override
+  void onClose() {
+    shimmerEffect();
+    super.onClose();
   }
 
  
-  
-  // Method to simulate data loading
+
   void shimmerEffect() {
-    // Simulating a delay to mimic data fetching process
-    Future.delayed(const Duration(seconds: 3), () {
-      isLoading.value = false; // Set isLoading to false when loading is complete
+    Future.delayed(const Duration(seconds: 1), () {
+      isLoading.value = false; 
     });
   }
 
 
- Future<void> _getUserLocation() async {
-    var status = await Permission.location.request();
-    if (status == PermissionStatus.granted) {
-      try {
-        Position position = await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.high);
-
+Future<void> _getUserLocation() async {
+    isLoading.value = true;
+    try {
+      final permissionStatus = await Permission.location.request();
+      if (permissionStatus == PermissionStatus.granted) {
+        final position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+        );
         userLocation.value = LatLng(position.latitude, position.longitude);
-      } catch (e) {
-        print(e);
+      } else {
+        throw Exception('Location permission not granted');
       }
+    } catch (e) {
+      print('Error fetching user location: $e');
+      // Handle error, display message to the user, etc.
+    } finally {
+      isLoading.value = false;
     }
   }
 }
-

@@ -17,43 +17,36 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  // static const INITIAL = Routes.SPLASH;
-
-  static const splashscreen = '/';
-  static const registerScreen = '/register';
-  static const loginScreen = '/login';
-  static const homeScreen = '/home';
-  static const profileScreen = '/profile';
-static const updateProfileScreen = '/profile-update';
+   
 
   static final routes = [
     GetPage(
-      name: splashscreen,
+      name: Routes.splashscreen,
       page: () => const SplashView(),
       binding: SplashBinding(),
     ),
     GetPage(
-      name: registerScreen,
+      name: Routes.registerScreen,
       page: () => RegisterScreen(),
       binding: AuthBinding(),
     ),
     GetPage(
-      name: loginScreen,
+      name: Routes.loginScreen,
       page: () => LoginScreen(),
       binding: AuthBinding(),
     ),
     GetPage(
-      name: homeScreen,
+      name: Routes.homeScreen,
       page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: profileScreen,
+      name: Routes.profileScreen,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
       GetPage(
-      name: updateProfileScreen,
+      name: Routes.updateProfileScreen,
       page: () => const UpdateProfile(),
       binding: UpdateProfileBinding(),
     ),

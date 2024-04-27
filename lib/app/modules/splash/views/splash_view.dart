@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tambalbanonline/app/modules/auth/controllers/auth_controller.dart';
+import 'package:tambalbanonline/app/routes/app_pages.dart';
 
 
 
@@ -14,9 +15,9 @@ class SplashView extends StatelessWidget {
     Future.delayed(const Duration(seconds: 2), () {
       final AuthController authController = Get.put(AuthController());
        if (authController.isLoggedIn.value) {
-       Get.offNamed('/home');
+       Get.offNamed(Routes.homeScreen);
     } else {
-       Get.offNamed('/login');
+       Get.offNamed(Routes.loginScreen);
     }
     });
 
