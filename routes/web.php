@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TambalbanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('pages.auth.login');
+
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('home', function () {
+        return view('pages.admin.dashboard', ['type_menu' => '']);
+    })->name('home'); 
+    route::resource('admin/tambalbanonline', TambalbanController::class);
+    
+
 });
