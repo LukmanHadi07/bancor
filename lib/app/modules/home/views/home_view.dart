@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tambalbanonline/app/modules/profile/views/profile_view.dart';
-import 'package:tambalbanonline/app/routes/app_pages.dart';
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 import '../controllers/home_controller.dart';
 
