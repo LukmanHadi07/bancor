@@ -46,9 +46,7 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror
-                                            <span class="password-toggle-icon" onclick="togglePasswordVisibility()">
-                                                <i class="fas fa-eye" id="togglePassword"></i>
-                                            </span>
+                                           
                                         </div>
                                        <hr>
                                         <div class="form-group">
