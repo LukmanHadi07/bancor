@@ -108,12 +108,17 @@ Widget _containerDaftarTambanBan() {
           color: ColorsApp.orange,
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(10), topRight: Radius.circular(10))),
-      child: const Center(
-          child: Text(
-        'Daftar Lokasi Tambal Ban',
-        style: TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-      )),
+      child: Center(
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(Routes.listTambalBan);
+            },
+            child: const Text(
+                    'Daftar Lokasi Tambal Ban',
+                    style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+          )),
     ),
   );
 }

@@ -6,5 +6,6 @@ abstract class Routes {
   static const loginScreen = '/login';
   static const homeScreen = '/home';
   static const profileScreen = '/profile';
-static const updateProfileScreen = '/profile-update';
+  static const updateProfileScreen = '/profile-update';
+  static const listTambalBan = '/listTanmbalBan';
 }
