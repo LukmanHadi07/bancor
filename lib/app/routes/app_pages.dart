@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:tambalbanonline/app/modules/list_tambal_ban/bindings/list_tambal_ban_bindings.dart';
+import 'package:tambalbanonline/app/modules/list_tambal_ban/views/list_tambal_ban.dart';
 import 'package:tambalbanonline/app/modules/profile/bindings/updateprofile_binding.dart';
 import 'package:tambalbanonline/app/modules/profile/views/update_profile.dart';
 
@@ -49,6 +51,11 @@ class AppPages {
       name: Routes.updateProfileScreen,
       page: () => const UpdateProfile(),
       binding: UpdateProfileBinding(),
+    ),
+      GetPage(
+      name: Routes.listTambalBan,
+      page: () => const ListTambalBan(),
+      binding: ListTambalBanBindis(),
     ),
   ];
 }

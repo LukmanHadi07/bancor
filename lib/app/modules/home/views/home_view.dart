@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tambalbanonline/app/modules/profile/views/profile_view.dart';
+import 'package:tambalbanonline/app/routes/app_pages.dart';
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 import '../controllers/home_controller.dart';
 
@@ -108,12 +109,17 @@ Widget _containerDaftarTambanBan() {
           color: ColorsApp.orange,
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(10), topRight: Radius.circular(10))),
-      child: const Center(
-          child: Text(
-        'Daftar Lokasi Tambal Ban',
-        style: TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
-      )),
+      child: Center(
+          child: InkWell(
+            onTap: () {
+              Get.toNamed(Routes.listTambalBan);
+            },
+            child: const Text(
+                    'Daftar Lokasi Tambal Ban',
+                    style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+          )),
     ),
   );
 }
