@@ -1,7 +1,5 @@
-import 'dart:ffi';
-import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,8 +37,6 @@ RxString imageUrl = ''.obs;
 
   Future<String?>  uploadImage(File imageFile) async {
     try {
-       // ignore: unrelated_type_equality_checks
-       if(imageFile == null) return null;
        String userId = firebaseAuth.currentUser!.uid;
        if (userId.isEmpty) {
         throw Exception('User is not authenticated');

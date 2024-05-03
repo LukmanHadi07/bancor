@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:tambalbanonline/app/modules/detail_tambalban/bindings/detail_tambalban_bindings.dart';
+import 'package:tambalbanonline/app/modules/detail_tambalban/views/detail_tambalban_view.dart';
 import 'package:tambalbanonline/app/modules/list_tambal_ban/bindings/list_tambal_ban_bindings.dart';
 import 'package:tambalbanonline/app/modules/list_tambal_ban/views/list_tambal_ban.dart';
 import 'package:tambalbanonline/app/modules/profile/bindings/updateprofile_binding.dart';
@@ -56,6 +58,11 @@ class AppPages {
       name: Routes.listTambalBan,
       page: () => const ListTambalBan(),
       binding: ListTambalBanBindis(),
+    ),
+    GetPage(
+      name: Routes.detailTambalBan,
+      page: () => const DetailTambalBan(),
+      binding: DetailTambalBanBinding(),
     ),
   ];
 }
