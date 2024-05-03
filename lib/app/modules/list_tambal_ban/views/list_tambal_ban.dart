@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:tambalbanonline/app/routes/app_pages.dart';
+import 'package:tambalbanonline/app/utils/commont/colors.dart';
 
 class ListTambalBan extends StatelessWidget {
   const ListTambalBan({super.key});
@@ -8,7 +10,12 @@ class ListTambalBan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: const Text('Daftar Tambal Ban ')),
+        backgroundColor: ColorsApp.orange,
+        title:  const Text('DAFTAR BANCOR', style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold
+        ),),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -54,11 +61,15 @@ class ListTambalBan extends StatelessWidget {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10, right: 10),
+             Padding(
+              padding: const EdgeInsets.only(bottom: 10, right: 10),
               child: Align(
                 alignment: Alignment.bottomRight,
-                child:  Icon(Icons.arrow_circle_right, color: Colors.white,)
+                child:  InkWell(
+                  onTap: (){
+                    Get.toNamed(Routes.detailTambalBan);
+                  },
+                  child: const Icon(Icons.arrow_circle_right, color: Colors.white,))
               ),
             ),
           ],

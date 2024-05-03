@@ -5,12 +5,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/list_notifier.dart';
-
 import 'package:tambalbanonline/app/modules/auth/controllers/auth_controller.dart';
 import 'package:tambalbanonline/app/modules/home/controllers/home_controller.dart';
 import 'package:tambalbanonline/app/modules/profile/controllers/update_profile_controller.dart';
-
 import 'package:tambalbanonline/app/routes/app_pages.dart';
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 import 'package:tambalbanonline/app/utils/widgets/custom_textfield.dart';
