@@ -81,15 +81,8 @@ Widget _buildMapContainer() {
           ),
         },
         onMapCreated: (GoogleMapController controller) {},
-        // Tambahkan callback untuk menangani kesalahan
-        onCameraMoveStarted: () {
-          // Mengatur loading menjadi true ketika pengguna mulai berinteraksi dengan peta
-          homeController.isLoading.value = true;
-        },
-        onCameraIdle: () {
-          // Mengatur loading menjadi false ketika peta selesai bergerak
-          homeController.isLoading.value = false;
-        },
+        
+       
       ),
     ),
   );

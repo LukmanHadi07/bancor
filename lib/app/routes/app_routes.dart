@@ -8,5 +8,4 @@ abstract class Routes {
   static const profileScreen = '/profile';
   static const updateProfileScreen = '/profile-update';
   static const listTambalBan = '/listTanmbalBan';
-  static const detailTambalBan = '/detail-tambalban';
 }
