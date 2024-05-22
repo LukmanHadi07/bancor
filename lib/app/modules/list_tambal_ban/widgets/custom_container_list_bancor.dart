@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
@@ -43,37 +44,59 @@ class ContainerCustomListBancor extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
       ),
-      child: Image.network(
-        bancorModels.gambarJasaBancor!,
-        fit: BoxFit.cover,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.network(
+            bancorModels.gambarJasaBancor!,
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     ),
     Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, 
-          children: [
-            Text(
-              bancorModels.nama!,
-              style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                  color: ColorsApp.orange
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start, 
+            children: [
+              Text(
+                bancorModels.nama!,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black
+                ),
+                 
               ),
-            ),
-            Text('Rp.${bancorModels.harga}'),
-          ],
+              Text('Rp.${bancorModels.harga}', style: const TextStyle(
+                color: Colors.black45,
+                fontSize: 12
+              ),),
+              const Gap(5),
+              Text('Alamat : ${bancorModels.alamat}', style: const TextStyle(
+                color: Colors.black45,
+                fontWeight: FontWeight.w700,
+                fontSize: 10
+              ),
+              textAlign: TextAlign.justify,
+              maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
-      ),
     ),
+    
+    
     const Gap(50),
-    Padding(
-      padding: const EdgeInsets.only(bottom: 10, right: 10),
+    const Padding(
+      padding: EdgeInsets.only(bottom: 10, right: 10),
       child: Align(
         alignment: Alignment.bottomRight,
         child: InkWell(
-          child: const Icon(
+          child: Icon(
             Icons.arrow_circle_right,
             color: ColorsApp.orange,
           ),
