@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:tambalbanonline/app/data/models/bancor_models/bancor_models.dart';
-import 'package:tambalbanonline/app/routes/app_pages.dart';
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 
 class ContainerCustomListBancor extends StatelessWidget {

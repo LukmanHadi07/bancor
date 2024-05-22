@@ -22,7 +22,7 @@ class DetailTambalBanController extends GetxController {
       if (activeCategory != id) {
         activeCategory.value = id;
         loading.value = true;
-        final url = Uri.parse('https://bancor.my.id/api/bancorapi/$id');
+        final url = Uri.parse('https://bancor.my.id/api/bancorapi/$id'); //
         final response = await http.get(url);
         // Print the response from the API
         print('API Response: ${response.body}');

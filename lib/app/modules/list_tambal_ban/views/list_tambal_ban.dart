@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tambalbanonline/app/modules/detail_tambalban/controllers/detail_tambalban_controllers.dart';
-import 'package:tambalbanonline/app/modules/detail_tambalban/views/detail_tambalban_view.dart';
 import 'package:tambalbanonline/app/modules/list_tambal_ban/controllers/list_tambal_ban_controllers.dart';
 import 'package:tambalbanonline/app/modules/list_tambal_ban/widgets/custom_container_list_bancor.dart';
-import 'package:tambalbanonline/app/routes/app_pages.dart';
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 
 class ListTambalBan extends StatelessWidget {

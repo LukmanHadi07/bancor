@@ -19,7 +19,7 @@ class ListTambalBanControllers extends GetxController {
     loading.value = true;
 
     try {
-      final url = Uri.parse('https://bancor.my.id/api/bancorapi');
+      final url = Uri.parse('https://bancor.my.id/api/bancorapi'); //
       final response = await http.get(url);
        // Print the response from the API
       print('API Response: ${response.body}');
