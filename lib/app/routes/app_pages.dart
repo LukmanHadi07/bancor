@@ -21,7 +21,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-   
+     static const detailTambalBan = '/detail-tambalban/:id';
 
   static final routes = [
     GetPage(
@@ -56,12 +56,12 @@ class AppPages {
     ),
       GetPage(
       name: Routes.listTambalBan,
-      page: () => const ListTambalBan(),
+      page: () =>  ListTambalBan(),
       binding: ListTambalBanBindis(),
     ),
     GetPage(
-      name: Routes.detailTambalBan,
-      page: () => const DetailTambalBan(),
+      name: detailTambalBan,
+      page: () => DetailTambalBan(id: int.parse(Get.parameters['id']!) ,),
       binding: DetailTambalBanBinding(),
     ),
   ];
