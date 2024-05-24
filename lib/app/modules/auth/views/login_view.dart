@@ -14,7 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool ibObscure = true;
+  bool isObscure = true;
 
   String get email => _emailController.text.trim();
   String get password => _passwordController.text.trim();
@@ -81,30 +81,33 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Password harus di isi";
-                      } else if (value.length < 4) {
-                        return 'Password minimal 4 karakter';
-                      } else if (value.length > 10) {
-                        return 'Password maksimal 10 karakter';
-                      } 
-                      return null;
-                    },
-                    obscureText: ibObscure,
-                    controller: _passwordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Password harus di isi";
+                        } else if (value.length < 4) {
+                          return 'Password minimal 4 karakter';
+                        } else if (value.length > 10) {
+                          return 'Password maksimal 10 karakter';
+                        } 
+                        return null;
+                      },
+                      obscureText: isObscure,
+                      controller: _passwordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
                         labelText: 'Password',
-                        hintText: 'Enter your email',
+                        hintText: 'Enter your password',
                         border: const OutlineInputBorder(),
                         suffixIcon: IconButton(
-                            onPressed: () {},
-                            // ignore: dead_code
-                            icon: Icon(ibObscure
-                                ? Icons.visibility_off
-                                : Icons.visibility))),
-                  ),
+                          onPressed: () {
+                            setState(() {
+                              isObscure = !isObscure; // Toggle nilai isObscure
+                            });
+                          },
+                          icon: Icon(isObscure ? Icons.visibility_off : Icons.visibility),
+                        ),
+                      ),
+                    ),
                 ),
                 InkWell(
                   onTapCancel: () {},

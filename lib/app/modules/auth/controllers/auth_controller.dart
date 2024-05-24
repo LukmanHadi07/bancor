@@ -45,13 +45,25 @@ final RxBool isLoggedIn = false.obs;
     isLoggedIn.value = value;
   }
   
-  void register(String email, String password )  async {
-    try {
-      await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-      Get.snackbar('Success', 'Registration Success');
+ void register(String email, String password) async {
+  try {
+    UserCredential userCredential = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+    
+    await userCredential.user?.sendEmailVerification();
+    
+
+    await userCredential.user?.reload(); 
+    if (userCredential.user!.emailVerified) {
+      Get.snackbar('Success', 'Registration Success. Please check your email for verification.');
       Get.offNamed(Routes.loginScreen);
-    } catch (firebaseAuthException) {}
+    } else {
+      Get.snackbar('Success', 'Registration Success. Please check your email for verification.');
+    }
+  } catch (firebaseAuthException) {
+    // Handle error
   }
+}
+
 
   void login(String email, String password) async {
     try {

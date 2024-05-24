@@ -116,7 +116,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             hintText: 'Enter your email',
             border: const OutlineInputBorder(),
             suffixIcon: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                 setState(() {
+                              ibObscure = !ibObscure; // Toggle nilai isObscure
+                            });
+              },
               // ignore: dead_code
               icon: Icon(ibObscure ? Icons.visibility_off : Icons.visibility),
               
@@ -196,131 +200,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
  
   bool _isValidEmail(String email) {
-    // Regular expression for email validation
     final emailRegex = RegExp(
         r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'); // You can adjust this regex as per your requirements
     return emailRegex.hasMatch(email);
   }
 }
 
-//  Widget logo(BuildContext context) {
-//   return Padding(
-//     padding: const EdgeInsets.only(top: 50, bottom: 25),
-//     child: Image.asset('assets/LOGO.png', width: 250, height: 250,),
-//   );
-//  }
-
-//  Widget textRegister(BuildContext context) {
-//   return  const  Padding(
-//     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-//     child: Row(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       children: [
-//          Text('Register' ,
-//                     textAlign: TextAlign.left,
-//                    style: TextStyle(
-//                     fontSize: 25,
-//                     fontWeight: FontWeight.bold,
-//                     color: Color(0xffFF701D)
-                    
-//                    ),),
-//       ],
-//     ),
-//   );
-//           }
-
-//  Widget nameRegister(BuildContext context) {
-
-//   return 
-//  }
-
-
-//   Widget phoneRegister(BuildContext context) {
-//   final TextEditingController phoneController = TextEditingController();
-//   return Padding(
-//     padding: const EdgeInsets.symmetric(horizontal: 15),
-//     child: TextField(
-//      controller: phoneController,
-//      keyboardType: TextInputType.phone,
-//      decoration:const  InputDecoration(
-//           labelText: 'Phone Number',
-//           hintText: 'Enter your number',
-//           border: OutlineInputBorder(
-//              borderSide: BorderSide(color: Color(0xff2596BE), width: 2.0),
-//           ),
-//           ),
-//      ),
-//     );
-//  }
-
-//  Widget emailRegister(BuildContext context) {
-//   final TextEditingController emailController = TextEditingController();
-//   return Padding(
-//     padding: const EdgeInsets.symmetric(horizontal: 15),
-//     child: TextField(
-//      controller: emailController,
-//      keyboardType: TextInputType.emailAddress,
-//      decoration:const  InputDecoration(
-//           labelText: 'Email',
-//           hintText: 'Enter your email',
-//           border: OutlineInputBorder(
-//              borderSide: BorderSide(color: Color(0xff2596BE), width: 2.0),
-//           ),
-//           ),
-//      ),
-//     );
-//  }
-
-//  Widget passwordRegister(BuildContext context) {
-//    final TextEditingController passwordController =  TextEditingController();
-//    bool? ibObscure = true;
-//   return   Padding(
-//     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-//     child: TextField(
-//     obscureText: ibObscure,
-//      controller: passwordController,
-//      keyboardType: TextInputType.visiblePassword,
-//      decoration:  InputDecoration(
-//           labelText: 'Password',
-//           hintText: 'Enter your email',
-//           border: const OutlineInputBorder(),
-//           suffixIcon: IconButton(
-//             onPressed: () {},
-//             // ignore: dead_code
-//             icon: Icon(ibObscure ? Icons.visibility_off : Icons.visibility))
-//      ),
-     
-//     ),
-//   );
-//  }
-
- 
-
-//  Widget buttonRegister(BuildContext context) {
-//   return 
-//  }
-
-//  Widget login(BuildContext context){
-//   return Row(
-//     mainAxisAlignment: MainAxisAlignment.center,
-//     children: [
-//       const  Text('Have Account ? ' ,
-//                    style: TextStyle(
-//                     fontSize: 14,
-//                     fontWeight: FontWeight.bold,
-//                      color:
-//                     Color(0xffFF701D),
-//                    ),),
-//           InkWell(
-//             onTap: (){
-//               Get.offNamed('/login');
-//             },
-//             child: const Text('Login ' ,
-//                      style: TextStyle(
-//                       fontWeight: FontWeight.bold,
-//                        color: Color(0xff2596BE)
-//                      ),),
-//           )
-//     ],
-//   );
-//  }
