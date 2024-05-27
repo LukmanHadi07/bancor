@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:tambalbanonline/app/data/models/bancor_models/bancor_models.dart';
 import 'package:tambalbanonline/app/modules/detail_tambalban/controllers/detail_tambalban_controllers.dart';
+import 'package:tambalbanonline/app/modules/telurusi_maps/views/telurusi_maps.dart';
+import 'package:tambalbanonline/app/routes/app_pages.dart';
 
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 
-class DetailTambalBan extends StatelessWidget {
+class DetailTambalBan extends StatefulWidget {
   final int id;
   const DetailTambalBan({
     Key? key,
     required this.id,
   }) : super(key: key);
 
+  @override
+  State<DetailTambalBan> createState() => _DetailTambalBanState();
+}
+
+class _DetailTambalBanState extends State<DetailTambalBan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +28,12 @@ class DetailTambalBan extends StatelessWidget {
       body: Column(
         children: [
           imageContainer(),
-          titleText(),
-          locationTitle(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 25),
+            child: Column(
+              children: [titleText(), locationTitle(), price()],
+            ),
+          )
         ],
       ),
     );
@@ -47,7 +59,7 @@ class DetailTambalBan extends StatelessWidget {
                   final List<BancorApiModels> bancorApi =
                       detailTambalBanController.bancorApi;
                   final int index =
-                      bancorApi.indexWhere((bancor) => bancor.id == id);
+                      bancorApi.indexWhere((bancor) => bancor.id == widget.id);
 
                   final int currentIndex = index >= 0 ? index : 0;
                   return Image.network(
@@ -67,9 +79,9 @@ class DetailTambalBan extends StatelessWidget {
                     Get.back();
                   },
                   child: const Icon(
-                    Icons.keyboard_arrow_left_rounded,
+                    Icons.arrow_back,
                     color: Colors.white,
-                    size: 40,
+                    size: 20,
                   )),
             )),
       ],
@@ -78,23 +90,28 @@ class DetailTambalBan extends StatelessWidget {
 
   Widget titleText() {
     return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
         child: GetBuilder<DetailTambalBanController>(
             builder: ((detailTambalBanController) {
           final List<BancorApiModels> bancorApi =
               detailTambalBanController.bancorApi;
-          final int index = bancorApi.indexWhere((bancor) => bancor.id == id);
-
+          final int index = bancorApi.indexWhere((bancor) => bancor.id == widget.id);
           final int currentIndex = index >= 0 ? index : 0;
-          return Center(
-            // ignore: prefer_const_constructors
-            child: Text(
-              detailTambalBanController.bancorApi[currentIndex].nama!,
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: ColorsApp.orange),
-            ),
+          return Row(
+            children: [
+              const Icon(
+                Icons.house,
+                color: Colors.red,
+              ),
+              const Gap(10),
+              Text(
+                detailTambalBanController.bancorApi[currentIndex].nama!,
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+            ],
           );
         })));
   }
@@ -106,25 +123,59 @@ class DetailTambalBan extends StatelessWidget {
           builder: ((detailTambalBanController) {
         final List<BancorApiModels> bancorApi =
             detailTambalBanController.bancorApi;
-        final int index = bancorApi.indexWhere((bancor) => bancor.id == id);
+        final int index = bancorApi.indexWhere((bancor) => bancor.id == widget.id);
 
         final int currentIndex = index >= 0 ? index : 0;
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Text(
-                  detailTambalBanController.bancorApi[currentIndex].alamat!,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+        return Row(
+          children: [
+            const Icon(
+              Icons.location_pin,
+              color: Colors.red,
+            ),
+            const Gap(10),
+            Expanded(
+              child: Text(
+                detailTambalBanController.bancorApi[currentIndex].alamat!,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
+        );
+      })),
+    );
+  }
+
+  Widget price() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+      child: GetBuilder<DetailTambalBanController>(
+          builder: ((detailTambalBanController) {
+        final List<BancorApiModels> bancorApi =
+            detailTambalBanController.bancorApi;
+        final int index = bancorApi.indexWhere((bancor) => bancor.id == widget.id);
+
+        final int currentIndex = index >= 0 ? index : 0;
+        return Row(
+          children: [
+            const Icon(
+              Icons.attach_money,
+              color: Colors.red,
+            ),
+            const Gap(10),
+            Expanded(
+              child: Text(
+                'Rp. ${detailTambalBanController.bancorApi[currentIndex].harga!}',
+                style: const TextStyle(
+                  color: Colors.black38,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
         );
       })),
     );
@@ -147,8 +198,15 @@ class DetailTambalBan extends StatelessWidget {
               decoration: BoxDecoration(
                   color: ColorsApp.orange,
                   borderRadius: BorderRadius.circular(10)),
-              child: TextButton(
-                  onPressed: () {},
+              child:TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TelurusiMaps(id: widget.id),
+                        ),
+                      );
+                    },
                   child: const Text(
                     'TELURUSI LOKASI TAMBAL BAN',
                     style: TextStyle(
@@ -169,7 +227,7 @@ class DetailTambalBan extends StatelessWidget {
                 final List<BancorApiModels> bancorApi =
                     detailTambalBanController.bancorApi;
                 final int index =
-                    bancorApi.indexWhere((bancor) => bancor.id == id);
+                    bancorApi.indexWhere((bancor) => bancor.id == widget.id);
 
                 final int currentIndex = index >= 0 ? index : 0;
                 return TextButton(

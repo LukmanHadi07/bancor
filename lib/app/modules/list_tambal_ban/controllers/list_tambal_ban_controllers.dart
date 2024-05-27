@@ -30,7 +30,7 @@ class ListTambalBanControllers extends GetxController {
             .toList();
         bancorApi.assignAll(bancorDataParsed);
       } else {
-        throw Exception('Failed to load data'); // Throw an exception for non-200 status codes
+        throw Exception('Failed to load data'); 
       }
     } catch (e) {
       hasError(true);

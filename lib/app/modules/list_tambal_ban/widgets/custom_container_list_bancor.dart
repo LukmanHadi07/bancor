@@ -18,7 +18,7 @@ class ContainerCustomListBancor extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: Container(
         width: double.infinity,
-        height: 150,
+        height: 170,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
@@ -37,7 +37,7 @@ class ContainerCustomListBancor extends StatelessWidget {
     Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
       width: 150,
-      height: 150,
+      height: 160,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,

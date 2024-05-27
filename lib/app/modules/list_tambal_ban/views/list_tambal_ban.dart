@@ -5,9 +5,37 @@ import 'package:tambalbanonline/app/modules/list_tambal_ban/controllers/list_tam
 import 'package:tambalbanonline/app/modules/list_tambal_ban/widgets/custom_container_list_bancor.dart';
 import 'package:tambalbanonline/app/utils/commont/colors.dart';
 
-class ListTambalBan extends StatelessWidget {
+class ListTambalBan extends StatefulWidget {
+  const ListTambalBan({super.key});
+
+  @override
+  State<ListTambalBan> createState() => _ListTambalBanState();
+}
+
+class _ListTambalBanState extends State<ListTambalBan> {
   final ListTambalBanControllers bancor = Get.put(ListTambalBanControllers());
-  final DetailTambalBanController detailTambalBanController = Get.put(DetailTambalBanController());
+
+  final DetailTambalBanController detailTambalBanController =
+      Get.put(DetailTambalBanController());
+  bool isRefreshing = false;
+
+  Future<void> _refreshScreen() async {
+    try {
+      setState(() {
+        isRefreshing = true;
+      });
+      await bancor.getAllDataBancor();
+
+      setState(() {
+        isRefreshing = false;
+      });
+    } catch (e) {
+      setState(() {
+        isRefreshing = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +48,7 @@ class ListTambalBan extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Obx(() {
             if (bancor.loading.value) {
               return const Center(
@@ -29,12 +57,32 @@ class ListTambalBan extends StatelessWidget {
             } else if (bancor.hasError.value) {
               return Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
                       'assets/error.png',
                       width: 500,
                       height: 500,
                     ),
+                    Container(
+                      width: 100,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          color: ColorsApp.orange,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: TextButton(
+                        onPressed: isRefreshing ? null : _refreshScreen,
+                        child: isRefreshing
+                            ? const CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                              )
+                            : const Text(
+                                'Refresh',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                      ),
+                    )
                   ],
                 ),
               );
