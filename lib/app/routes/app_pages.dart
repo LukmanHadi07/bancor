@@ -5,6 +5,7 @@ import 'package:tambalbanonline/app/modules/list_tambal_ban/bindings/list_tambal
 import 'package:tambalbanonline/app/modules/list_tambal_ban/views/list_tambal_ban.dart';
 import 'package:tambalbanonline/app/modules/profile/bindings/updateprofile_binding.dart';
 import 'package:tambalbanonline/app/modules/profile/views/update_profile.dart';
+import 'package:tambalbanonline/app/modules/telurusi_maps/views/telurusi_maps.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/login_view.dart';
@@ -22,6 +23,7 @@ class AppPages {
   AppPages._();
 
      static const detailTambalBan = '/detail-tambalban/:id';
+     static const telurusiMaps = '/telurusi-maps/:id';
 
   static final routes = [
     GetPage(
@@ -56,13 +58,17 @@ class AppPages {
     ),
       GetPage(
       name: Routes.listTambalBan,
-      page: () =>  ListTambalBan(),
+      page: () =>  const ListTambalBan(),
       binding: ListTambalBanBindis(),
     ),
     GetPage(
       name: detailTambalBan,
       page: () => DetailTambalBan(id: int.parse(Get.parameters['id']!) ,),
       binding: DetailTambalBanBinding(),
+    ),
+    GetPage(
+      name: telurusiMaps,
+      page: () =>  TelurusiMaps(id:  int.parse(Get.parameters['id']!)) ,
     ),
   ];
 }
